@@ -27,18 +27,18 @@ export default function Form({ setObjectAddress }: IAddress) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="address"
-          onChange={handleInput}
-          value={address}
-          placeholder="Search for any IP address or domain"
-          required
-        />
-        <button>{'>'}</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="address"
+        onChange={handleInput}
+        value={address}
+        placeholder="Search for any IP address or domain"
+        required
+      />
+      <button>
+        <img src="/images/icon-arrow.svg" alt="" />
+      </button>
+    </form>
   )
 }
