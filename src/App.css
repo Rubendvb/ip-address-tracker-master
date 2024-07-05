@@ -98,11 +98,10 @@ button {
   background-color: var(--Very-Dark-Gray);
 }
 
-.container-map {
-  width: 100%;
+.leaflet-container {
   z-index: -1;
+  height: 100vh;
 }
-
 .attribution {
   font-size: 12px;
   position: absolute;

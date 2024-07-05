@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Form from './components/Form/Form'
 import Header from './components/Header/Header'
@@ -25,6 +25,15 @@ function App() {
   }
 
   const [objectAddress, setObjectAddress] = useState<AddressProps>(initialState)
+  const [position, setPosition] = useState({ lat: '', lng: '' })
+
+  useEffect(() => {
+    const { lat, lng } = objectAddress.location
+
+    setPosition({ lat, lng })
+
+    return () => {}
+  }, [objectAddress])
 
   return (
     <>
@@ -56,7 +65,7 @@ function App() {
         </section>
       </main>
 
-      <Map />
+      <Map position={position} />
 
       <div className="attribution">
         Challenge by{' '}
