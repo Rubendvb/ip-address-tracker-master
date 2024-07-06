@@ -25,12 +25,17 @@ function App() {
   }
 
   const [objectAddress, setObjectAddress] = useState<AddressProps>(initialState)
-  const [position, setPosition] = useState({ lat: '', lng: '' })
+  const [position, setPosition] = useState({ lat: 51.505, lng: -0.09 })
 
   useEffect(() => {
     const { lat, lng } = objectAddress.location
 
-    setPosition({ lat, lng })
+    if (lat && lng) {
+      setPosition({
+        lat: parseFloat(lat),
+        lng: parseFloat(lng),
+      })
+    }
 
     return () => {}
   }, [objectAddress])
