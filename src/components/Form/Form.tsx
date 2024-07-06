@@ -36,8 +36,8 @@ export default function Form({ setObjectAddress }: IAddress) {
         placeholder="Search for any IP address or domain"
         required
       />
-      <button>
-        <img src="/images/icon-arrow.svg" alt="" />
+      <button aria-label="Search">
+        <img src="/images/icon-arrow.svg" alt="Image Arrow" />
       </button>
     </form>
   )
