@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1440px; */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@ header {
   background-repeat: no-repeat;
   height: 300px;
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 1024px) {
     background-image: url('/images/pattern-bg-desktop.png');
   }
 
@@ -21,6 +21,10 @@ header {
     font-weight: var(--font-500);
     text-align: center;
     padding-top: 36px;
+
+    @media only screen and (min-width: 1024px) {
+      font-size: 32px;
+    }
   }
 }
 
@@ -36,6 +40,12 @@ main {
   align-items: center;
   gap: 24px;
   z-index: 20;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 1110px;
+    gap: 48px;
+    top: 85px;
+  }
 }
 
 form {
@@ -43,6 +53,10 @@ form {
   display: flex;
   align-items: center;
   width: 100%;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 555px;
+  }
 }
 
 input,
@@ -51,6 +65,11 @@ button {
   border: none;
   outline: none;
   padding: 20px;
+
+  @media only screen and (min-width: 1024px) {
+    cursor: pointer;
+    padding: 24px;
+  }
 }
 
 input {
@@ -60,6 +79,10 @@ input {
 
   &::placeholder {
     color: var(--Dark-Gray);
+  }
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 18px;
   }
 }
 
@@ -72,6 +95,14 @@ section {
   align-items: center;
   gap: 30px;
   padding: 28px;
+  text-align: center;
+
+  @media only screen and (min-width: 1024px) {
+    flex-direction: row;
+    padding: 32px;
+    gap: 0;
+    text-align: start;
+  }
 
   div {
     display: flex;
@@ -79,17 +110,59 @@ section {
     align-items: center;
     gap: 6px;
 
+    @media only screen and (min-width: 1024px) {
+      align-items: flex-start;
+      padding-right: 60px;
+      position: relative;
+      align-self: flex-start;
+      padding-left: 32px;
+      gap: 10px;
+
+      &::before {
+        content: '';
+        width: 1px;
+        height: 65px;
+        background-color: var(--Dark-Gray);
+        opacity: 0.2;
+        color: black;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    &:first-of-type {
+      padding-left: unset;
+      &::before {
+        content: unset;
+      }
+    }
+
+    &:last-child {
+      padding-right: unset;
+    }
+
     span:first-child {
       color: var(--Dark-Gray);
       font-weight: var(--font-700);
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 1px;
+
+      @media only screen and (min-width: 1024px) {
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
     }
 
     span:last-child {
       font-weight: var(--font-500);
       color: var(--Very-Dark-Gray);
+
+      @media only screen and (min-width: 1024px) {
+        font-size: 26px;
+      }
     }
   }
 }

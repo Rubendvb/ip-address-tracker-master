@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 
 interface IMap {
   position: {
@@ -10,37 +10,35 @@ interface IMap {
 }
 
 export default function Map({ position }: IMap) {
-  const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
-    51.505, -0.09,
-  ])
+  const customIcon = useMemo(
+    () =>
+      new Icon({
+        iconUrl: '/images/icon-location.svg',
+      }),
+    []
+  )
 
-  const customIcon = new Icon({
-    iconUrl: '/images/icon-location.svg',
-  })
-
-  const Markers = () => {
+  const Markers = ({ position }: { position: [number, number] }) => {
     const map = useMap()
 
-    map.setView(selectedPosition, map.getZoom())
+    useEffect(() => {
+      map.setView(position, map.getZoom())
+    }, [map, position])
 
-    return selectedPosition ? (
+    return (
       <Marker
-        key={selectedPosition[0]}
-        position={selectedPosition}
+        position={position}
         icon={customIcon}
         interactive={false}
       ></Marker>
-    ) : null
+    )
   }
 
-  useEffect(() => {
-    const { lat, lng } = position
-    setSelectedPosition([lat, lng])
-  }, [position])
+  const positionArray: [number, number] = [position.lat, position.lng]
 
   return (
     <MapContainer
-      center={selectedPosition}
+      center={positionArray}
       zoom={13}
       scrollWheelZoom={false}
       zoomControl={false}
@@ -49,7 +47,7 @@ export default function Map({ position }: IMap) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Markers />
+      <Markers position={positionArray} />
     </MapContainer>
   )
 }

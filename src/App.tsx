@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import Form from './components/Form/Form'
 import Header from './components/Header/Header'
@@ -25,20 +25,29 @@ function App() {
   }
 
   const [objectAddress, setObjectAddress] = useState<AddressProps>(initialState)
-  const [position, setPosition] = useState({ lat: 51.505, lng: -0.09 })
+  const [position, setPosition] = useState({ lat: 34.08057, lng: -118.07285 })
+  const [location, setLocation] = useState('California, US 91770')
+  const [isp, setIsp] = useState('SpaceX Starlink')
 
-  useEffect(() => {
-    const { lat, lng } = objectAddress.location
+  const updateLocation = useCallback(() => {
+    const { lat, lng, region, country, postalCode } = objectAddress.location
+    const { isp } = objectAddress
 
     if (lat && lng) {
       setPosition({
         lat: parseFloat(lat),
         lng: parseFloat(lng),
       })
-    }
 
-    return () => {}
+      setLocation(`${region ? `${region},` : ''} ${country} ${postalCode}`)
+      setIsp(`${isp ? `${isp}` : 'Not isp'}`)
+    }
   }, [objectAddress])
+
+  useEffect(() => {
+    updateLocation()
+    return () => {}
+  }, [objectAddress, updateLocation])
 
   return (
     <>
@@ -50,22 +59,19 @@ function App() {
         <section>
           <div>
             <span>IP Address</span>
-            <span>{objectAddress.ip}</span>
+            <span>{`${objectAddress.ip || '192.212.174.101'}`}</span>
           </div>
           <div>
             <span>Location</span>
-            <span>
-              {objectAddress.location.region}, {objectAddress.location.country}{' '}
-              {objectAddress.location.postalCode}
-            </span>
+            <span>{location}</span>
           </div>
           <div>
             <span>Timezone</span>
-            <span>UTC {objectAddress.location.timezone}</span>
+            <span>UTC {objectAddress.location.timezone || '-07:00'}</span>
           </div>
           <div>
             <span>ISP</span>
-            <span>{objectAddress.isp || 'Not ISP'}</span>
+            <span>{isp}</span>
           </div>
         </section>
       </main>
