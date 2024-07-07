@@ -13,10 +13,12 @@ export const getAddress = async (ip: string) => {
       }&ipAddress=${ip}`
     )
 
-    return response.data
+    if (response.status === 200) {
+      return response.data
+    }
   } catch (error) {
     console.error('Error fetching data:', error)
-    return null
+    throw new Error('Error fetching data')
   }
 }
 

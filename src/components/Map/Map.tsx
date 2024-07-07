@@ -22,7 +22,7 @@ export default function Map({ position }: IMap) {
     const map = useMap()
 
     useEffect(() => {
-      map.setView(position)
+      map.setView(position, map.getZoom())
     }, [map, position])
 
     return (

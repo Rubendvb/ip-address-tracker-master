@@ -81,14 +81,6 @@ function App() {
     } else {
       console.log('Geolocation is not supported by this browser.')
     }
-
-    navigator.geolocation.getCurrentPosition((currentPosition) => {
-      const { latitude, longitude } = currentPosition.coords
-
-      console.log(currentPosition)
-
-      setPosition({ lat: latitude, lng: longitude })
-    })
   }, [])
 
   useEffect(() => {
