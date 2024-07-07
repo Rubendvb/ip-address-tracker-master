@@ -51,6 +51,12 @@ function App() {
       const response = await serviceAddress.getIp()
       const responseAddress = await serviceAddress.getAddress(response.data)
 
+      navigator.geolocation.getCurrentPosition((currentPosition) => {
+        const { latitude, longitude } = currentPosition.coords
+
+        setPosition({ lat: latitude, lng: longitude })
+      })
+
       setObjectAddress({
         ...objectAddress,
         ...responseAddress,
