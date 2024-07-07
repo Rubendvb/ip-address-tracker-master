@@ -37,7 +37,7 @@ export default function Form({ setObjectAddress }: IAddress) {
         required
       />
       <button aria-label="Search">
-        <img src="/images/icon-arrow.svg" alt="Image Arrow" />
+        <img src="/images/icon-arrow.svg" alt="Icon Arrow" />
       </button>
     </form>
   )
