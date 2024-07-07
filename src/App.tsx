@@ -76,8 +76,6 @@ function App() {
       navigator.permissions
         .query({ name: 'geolocation' })
         .then(function (result) {
-          console.log(result)
-
           setPermission(result.state)
         })
     } else {
